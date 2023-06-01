@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -21,7 +23,11 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField "String", "SERVER_URL", "\"https://api.deezer.com/\""
+        }
         release {
+            buildConfigField "String", "SERVER_URL", "\"https://api.deezer.com/\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -44,18 +50,57 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
 
+    // Room
+    kapt "androidx.room:room-compiler:2.5.1"
+    implementation "androidx.room:room-runtime:2.5.1"
+    implementation "androidx.room:room-ktx:2.5.1"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+
+    // Retrofit
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
+    implementation "com.google.code.gson:gson:2.10.1"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+
+    // For exposing and controlling media sessions
+    implementation "androidx.media:media:1.2.0"
+    implementation "androidx.media3:media3-session:1.0.1"
+
+    implementation "androidx.datastore:datastore-preferences:1.0.0-beta01"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:2.45"
+    kapt "com.google.dagger:hilt-android-compiler:2.45"
+    implementation "androidx.navigation:navigation-compose:2.5.1"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-process:2.3.1'
+
+    // Coil
+    implementation "io.coil-kt:coil-compose:2.3.0"
+
+    //Compose
+    implementation "com.google.accompanist:accompanist-permissions:0.23.1"
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
     implementation 'androidx.activity:activity-compose:1.5.1'
     implementation platform('androidx.compose:compose-bom:2022.10.00')
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-graphics'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

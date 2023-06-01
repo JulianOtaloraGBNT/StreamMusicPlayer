@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MusicPlayer</string>
+    <string name="trending">Trending right now</string>
+    <string name="favorites">Recent Favorites</string>
+    <string name="rock">Rock</string>
+    <string name="hiphop">Hip Hop</string>
+    <string name="electro">Electro</string>
+    <string name="player">Player</string>
+    <string name="progress_description">Progress Loader</string>
 </resources>

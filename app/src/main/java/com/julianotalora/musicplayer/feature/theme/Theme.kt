@@ -1,4 +1,4 @@
-package com.julianotalora.musicplayer.ui.theme
+package com.julianotalora.musicplayer.feature.theme
 
 import android.app.Activity
 import android.os.Build

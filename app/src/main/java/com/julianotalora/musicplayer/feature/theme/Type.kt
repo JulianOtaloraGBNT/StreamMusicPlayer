@@ -1,4 +1,4 @@
-package com.julianotalora.musicplayer.ui.theme
+package com.julianotalora.musicplayer.feature.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
